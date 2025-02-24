@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('image');
             $table->string('city');
             $table->string('country');
-            $table->SoftDeletes();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('airpots');
+        Schema::dropIfExists('airports');
     }
 };
