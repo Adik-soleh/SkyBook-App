@@ -29,10 +29,17 @@ class Flight extends Model
     {
         return $this->hasMany(FlightSeat::class);
     }
+    
 
     public function transactions()
     {
         return $this->hasMany(Transaction::class);
     }
 
+    public function classes()
+    {
+        return $this->hasMany(FlightClass::class);
+    }
+
+    
 }

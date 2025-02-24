@@ -28,19 +28,56 @@ class FlightResource extends Resource
                     Forms\Components\Wizard\Step::make('Flight Information')
                         ->schema([
                             Forms\Components\TextInput::make('flight_number')
-                            ->required()
-                            ->unique(ignoreRecord:true),
+                                ->required()
+                                ->unique(ignoreRecord: true),
                             Forms\Components\Select::make('airline_id')
-                            ->relationship('airline', 'name')
-                            ->required(),
+                                ->relationship('airline', 'name')
+                                ->required(),
                         ]),
                     Forms\Components\Wizard\Step::make('Flight Segments')
                         ->schema([
-                            // ...
+                            Forms\Components\Repeater::make('flight_segments')
+                            ->relationship('segments')
+                                ->schema([
+                                    Forms\Components\TextInput::make('sequence')
+                                        ->numeric()
+                                        ->required(),
+                                    Forms\Components\Select::make('airport_id')
+                                        ->relationship('airport', 'name')
+                                        ->required(),
+                                    Forms\Components\DateTimePicker::make('time')
+                                        ->required(),
+                                ])
+                                ->collapsed(false)
+                                ->minItems(1)
                         ]),
                     Forms\Components\Wizard\Step::make('Flight Class')
                         ->schema([
-                            // ...
+                            Forms\Components\Repeater::make('flight_classes')
+                                ->relationship('classes')
+                                ->schema([
+                                    Forms\Components\Select::make('class_type')
+                                        ->options([
+                                            'business' => 'Business',
+                                            'economy' => 'Economy',
+                                        ])
+                                        ->required(),
+                                    Forms\Components\TextInput::make('price')
+                                        ->required()
+                                        ->prefix('IDR')
+                                        ->numeric()
+                                        ->minValue(0),
+                                    Forms\Components\TextInput::make('total_seats')
+                                        ->required()
+                                        ->numeric()
+                                        ->minValue(1)
+                                        ->label('Total Seats'),
+                                    Forms\Components\Select::make('facilities')
+                                        ->relationship('facilities', 'name')
+                                        ->multiple()
+                                        ->required(),
+
+                                ])
                         ]),
                 ])->columnSpan(2)
             ]);
