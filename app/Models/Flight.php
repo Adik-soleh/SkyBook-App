@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Flight extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'flight_number',
@@ -29,7 +29,7 @@ class Flight extends Model
     {
         return $this->hasMany(FlightSeat::class);
     }
-    
+
 
     public function transactions()
     {
@@ -41,5 +41,73 @@ class Flight extends Model
         return $this->hasMany(FlightClass::class);
     }
 
-    
+    public function generateSeats()
+    {
+        $classes = $this->classes;
+
+        foreach ($classes as $class) {
+            $totalSeats = $class->total_seats;
+            $seatsPerRow = $this->getSeatsPerRow($class->class_type);
+            $rows = ceil($totalSeats / $seatsPerRow);
+
+            $exitingSeats = FlightSeat::where('flight_id', $this->id)
+                ->where('class_type', $class->class_type)
+                ->get();
+
+            $exitingRows = $exitingSeats->pluck('row')->unique()->toArray();
+
+            $seatCounter = 1;
+
+            for ($row = 1; $row <= $rows; $row++) {
+                if (!in_array($row, $exitingRows)) {
+                    for ($column = 1; $column <= $seatsPerRow; $column++) {
+                        if ($seatCounter > $totalSeats) {
+                            break;
+                        }
+
+                        $seatCode = $this->generateSeatCode($row, $column);
+
+                        FlightSeat::create([
+                            'flight_id' => $this->id,
+                            'name' => $seatCode,
+                            'row' => $row,
+                            'column' => $column,
+                            'is_available' => true,
+                            'class_type' => $class->class_type
+                        ]);
+
+                        $seatCounter++;
+                    }
+                }
+            }
+
+            foreach ($exitingSeats as $exitingSeat) {
+                if ($exitingSeat->column > $seatsPerRow || $exitingSeat->row > $rows) {
+                    $exitingSeat->is_available = false;
+                    $exitingSeat->save();
+                }
+            }
+        }
+
+
+    }
+
+    protected function getSeatsPerRow($classType)
+    {
+        switch ($classType) {
+            case 'business':
+                return 4;
+            case 'economy':
+                return 6;
+            default:
+                return 4;
+        }
+        ;
+    }
+
+    private function generateSeatCode($row, $column)
+    {
+        $rowLetter = chr(64 + $row);
+        return $rowLetter . $column;
+    }
 }
