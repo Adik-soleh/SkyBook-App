@@ -58,8 +58,8 @@ class FlightResource extends Resource
                                 ->schema([
                                     Forms\Components\Select::make('class_type')
                                         ->options([
-                                            'business' => 'Business',
                                             'economy' => 'Economy',
+                                            'business' => 'Business',
                                         ])
                                         ->required(),
                                     Forms\Components\TextInput::make('price')
@@ -87,7 +87,17 @@ class FlightResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('flight_number'),
+                Tables\Columns\TextColumn::make('airline.name'),
+                Tables\Columns\TextColumn::make('segments')
+                ->label('Route & Duration')
+                ->formatStateUsing(function(Flight $record): string{
+                    $fristSegment = $record->segments->first();
+                    $lastSegment = $record->segments->last();
+                    $route = $fristSegment->airport->iata_code . ' - ' . $lastSegment->airport->iata_code;
+                    $duration = (new \DateTime($fristSegment->time))->format('d F Y H:i') . '-' . (new \DateTime($lastSegment->time))->format('d F Y H:i');
+                    return $route . '|' . $duration;
+                })
             ])
             ->filters([
                 //
