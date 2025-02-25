@@ -23,7 +23,22 @@ class TransactionResource extends Resource
     {
         return $form
             ->schema([
-                
+                Forms\Components\Section::make('Informasi Umum')
+                    ->schema([
+                        Forms\Components\TextInput::make('code'),
+                        Forms\Components\Select::make('flight_id')
+                            ->relationship('flight', 'flight_number'),
+                        Forms\Components\Select::make('flight_class_id')
+                            ->relationship('class', 'class_type'),
+                    ]),
+                    Forms\Components\Section::make('Informasi Penumpang')
+                    ->schema([
+                        Forms\Components\TextInput::make('name'),
+                        Forms\Components\TextInput::make('email'),
+                        Forms\Components\TextInput::make('phone'),
+                        Forms\Components\Section::make('Daftar Penumpang')
+                        ->schema([])
+                    ])
             ]);
     }
 
