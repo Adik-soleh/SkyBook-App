@@ -3,27 +3,20 @@
 
 # ✈️ SkyBook Admin  
 
-**SkyBook Admin** adalah Content Management System (CMS) untuk mengelola data pemesanan tiket pesawat dengan mudah dan efisien! Dibangun menggunakan **Laravel & Filament**, aplikasi ini dirancang untuk memberikan pengalaman admin yang cepat, aman, dan intuitif!  
-
-## 🚀 Fitur Utama  
-- 🛫 **Manajemen Pemesanan**: Tambah, edit, dan hapus data pemesanan tiket pesawat!  
-- 👨‍✈️ **Kelola Pengguna**: Manajemen admin dan role-based access control (RBAC)!  
-- 📊 **Dashboard Interaktif**: Statistik real-time dengan **Filament Admin Panel**!  
-- 📩 **Notifikasi Otomatis**: Kirim email & notifikasi transaksi ke pelanggan!  
-- 🔒 **Keamanan Terjamin**: Proteksi data dengan Laravel Sanctum & hashing password!  
+**SkyBook Admin** adalah Content Management System (CMS) untuk mengelola data pemesanan tiket pesawat dengan mudah dan efisien! Dibangun menggunakan **Laravel & Filament**, aplikasi ini dirancang untuk memberikan pengalaman admin yang cepat, aman, dan intuitif!   
 
 ## 🛠️ Teknologi yang Digunakan  
 - 🖥 **Backend**: Laravel, Filament Admin  
 - 🎨 **Frontend**: Blade, Tailwind CSS  
-- 🗄 **Database**: PostgreSQL / MySQL  
+- 🗄 **Database**: MySQL  
 - 🔐 **Autentikasi**: Laravel Sanctum  
 
 ## 📦 Instalasi & Menjalankan Proyek  
 
 ### 1️⃣ Clone Repository  
 ```bash
-git clone https://github.com/username/skybook-admin.git
-cd skybook-admin
+git clone https://github.com/Adik-soleh/skybook-App.git
+cd skybook-App
 ```  
 
 ### 2️⃣ Install Dependencies  
@@ -58,14 +51,7 @@ php artisan migrate --seed
 php artisan serve
 npm run dev
 ```  
-Akses **SkyBook Admin** di `http://127.0.0.1:8000/admin` 🎉  
-
-## 🛤️ Roadmap  
-- ✅ **Manajemen Maskapai & Bandara**  
-- 🚀 **Integrasi pembayaran dengan Midtrans & Bitechip**  
-- 🏢 **Multi-role akses (Admin & Staff)**  
-- 📑 **Export data pemesanan ke Excel/PDF**  
-- 🔔 **Notifikasi email otomatis untuk pelanggan**  
+Akses **SkyBook Admin** di `http://127.0.0.1:8000/admin` 🎉   
 
 ## 📸 **Screenshots**  
 
