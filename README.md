@@ -1,5 +1,3 @@
-Berikut README yang sudah disesuaikan dengan Laravel dan Filament untuk **SkyBook Admin**! 🚀  
-
 ---
 
 # ✈️ SkyBook Admin
@@ -65,7 +63,25 @@ Akses **SkyBook Admin** di `http://127.0.0.1:8000/admin` 🎉
 - [ ] Integrasi pembayaran dengan Midtrans & Bitechip  
 - [ ] Multi-role akses (Admin & Staff)  
 - [ ] Export data pemesanan ke Excel/PDF  
-- [ ] Notifikasi email otomatis untuk pelanggan  
+- [ ] Notifikasi email otomatis untuk pelanggan
+
+## 📸 **Screenshots**  
+
+### 🏠 Airlines  
+<img src="public/images/list-airline.png" alt="🏠 Airline" width="600">  
+
+### 📝 Airports  
+<img src="public/images/list-airPort.png" alt="📝 List-airports" width="600">  
+
+### 🔍 Facility  
+<img src="public/images/list-facility.png" alt="🔍 Student Detail" width="600">  
+
+### ℹ️ Flight  
+<img src="public/images/list-flight.png" alt="ℹ️ About" width="600">  
+
+### 📋 Promo Code  
+<img src="public/images/promo-code-list.png" alt="📋 Student List" width="600">  
+ 
 
 ## 🤝 Kontribusi
 Pull request selalu diterima! Pastikan untuk mendiskusikan perubahan besar terlebih dahulu melalui issue.  
@@ -75,4 +91,3 @@ Proyek ini menggunakan lisensi **MIT**.
 
 ---
 
-Kalau ada tambahan fitur atau perubahan, tinggal disesuaikan lagi! 🚀
